@@ -1,6 +1,7 @@
 <img width="200px" src="http://i.imgur.com/vc5ZVqL.png" />
 
 # Symfony + Nginx + php-fpm
+[![Foo](https://badge.imagelayers.io/kitpages/symfony:latest.svg)](https://imagelayers.io/?images=kitpages/symfony:latest)
 
 Docker for Symfony application, powered by **Nginx** and **php-fpm**.
 
