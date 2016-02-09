@@ -20,7 +20,7 @@ RUN apt-get -qq update && apt-get -qq -y --no-install-recommends install \
     echo "daemon off;" >> /etc/nginx/nginx.conf
 
 COPY config/vhost.conf /etc/nginx/sites-enabled/default
-COPY config/supervisord.conf /etc/supervisor/supervisord.conf
+COPY config/supervisord/conf.d /etc/supervisor/conf.d
 
 WORKDIR /var/www
 
