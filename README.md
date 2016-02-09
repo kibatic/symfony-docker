@@ -1,4 +1,4 @@
-<img width="200px" src="http://i.imgur.com/vc5ZVqL.png" />
+![symfony-docker](http://i.imgur.com/vc5ZVqL.png?2)
 
 # Symfony + Nginx + php-fpm
 [![Foo](https://badge.imagelayers.io/kitpages/symfony:latest.svg)](https://imagelayers.io/?images=kitpages/symfony:latest)
