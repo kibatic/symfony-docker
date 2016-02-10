@@ -7,6 +7,8 @@ Docker for Symfony application, powered by **Nginx** and **php-fpm**.
 
 Based on Debian Jessie.
 
+If you are experiencing some issues, take a look at [TROUBLESHOOTING](TROUBLESHOOTING.md)
+
 ## Usage
 
 ```bash
