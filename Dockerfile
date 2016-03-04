@@ -24,6 +24,8 @@ COPY config/supervisord/conf.d /etc/supervisor/conf.d
 
 WORKDIR /var/www
 
+ONBUILD ADD . /var/www
+
 EXPOSE 80
 
 CMD ["/usr/bin/supervisord", "-n"]
