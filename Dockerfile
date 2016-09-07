@@ -2,7 +2,7 @@ FROM debian:jessie
 
 MAINTAINER Elie Charra <elie.charra [at] kitpages.fr>
 
-RUN apt-get -qq update && apt-get -qq -y --no-install-recommends install \
+RUN apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get -qq -y --no-install-recommends install \
     supervisor \
     ca-certificates \
     nginx \
