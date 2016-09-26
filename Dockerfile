@@ -9,6 +9,7 @@ RUN apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get -qq -y --no-ins
     php5 \
     php5-cli \
     php5-intl \
+    php5-zip \
     php5-fpm &&\
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* &&\
