@@ -24,11 +24,10 @@ script:
   - sudo docker build . -t kitpages/symfony-demo:$PHP_VERSION
   - git clone --branch v0.9.8 https://github.com/symfony/symfony-demo symfony; cd symfony
   - chmod 777 var/cache var/logs var/sessions
-  - sudo docker run --rm -v $(pwd):/var/www -v $HOME/.composer:/.composer kitpages/symfony-demo:$PHP_VERSION composer install
-  - sudo docker run --name symfony-demo -d -p 8001:80 -v $(pwd):/var/www kitpages/symfony-demo:$PHP_VERSION
+  - sudo docker run --rm -v $(pwd):/var/www -v $HOME/.composer:/root/.composer kitpages/symfony-demo:$PHP_VERSION composer install
+  - sudo docker run -d -p 8001:80 -v $(pwd):/var/www kitpages/symfony-demo:$PHP_VERSION
   - sleep 10
-  - curl -I localhost:8001
-  - docker logs symfony-demo
+  - curl -s localhost:8001 | grep -q "Welcome to the <strong>Symfony Demo</strong> application"
 
 notifications:
   email: true
