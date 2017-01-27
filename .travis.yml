@@ -8,6 +8,11 @@ env:
 
 services:
   - docker
+
+cache:
+  directories:
+    - $HOME/.composer
+
 install:
   # Build image
   - sudo docker build . -t kitpages/symfony:$PHP_VERSION
@@ -19,7 +24,7 @@ script:
   - sudo docker build . -t kitpages/symfony-demo:$PHP_VERSION
   - git clone --branch v0.9.8 https://github.com/symfony/symfony-demo symfony; cd symfony
   - chmod 777 var/cache var/logs var/sessions
-  - sudo docker run --rm -it -v $(pwd)/symfony:/var/www kitpages/symfony:$PHP_VERSION composer install
+  - sudo docker run --rm -it -v $(pwd)/symfony:/var/www -v $HOME/.composer:/.composer kitpages/symfony:$PHP_VERSION composer install
   - sudo docker run -d -p 8001:80 -v $(pwd)/symfony:/var/www kitpages/symfony:$PHP_VERSION
   - curl -I localhost:8001
 
