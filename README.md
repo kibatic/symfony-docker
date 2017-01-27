@@ -1,7 +1,10 @@
 ![symfony-docker](http://i.imgur.com/vc5ZVqL.png?2)
 
 # Symfony + Nginx + php-fpm
-[![Foo](https://badge.imagelayers.io/kitpages/symfony:latest.svg)](https://imagelayers.io/?images=kitpages/symfony:latest)
+[![Build Status](https://travis-ci.org/kitpages/symfony-docker.svg?branch=master)](https://travis-ci.org/kitpages/symfony-docker)
+[![](https://images.microbadger.com/badges/image/kitpages/symfony:latest.svg)](https://microbadger.com/images/kitpages/symfony:latest "Get your own image badge on microbadger.com")
+[![](https://images.microbadger.com/badges/version/kitpages/symfony:latest.svg)](https://microbadger.com/images/kitpages/symfony:latest "Get your own version badge on microbadger.com")
+
 
 Docker for Symfony application, powered by **Nginx** and **php-fpm**.
 
@@ -25,7 +28,7 @@ Symfony app will be accessible on http://localhost:8080/app.php
 
 ## Custom nginx configuration
 
-If you want to replace the default nginx settings, overwrite configuration file at `/etc/nginx/sites-enabled/default`. 
+If you want to replace the default nginx settings, overwrite configuration file at `/etc/nginx/sites-enabled/default`.
 
 ```dockerfile
 COPY nginx.conf /etc/nginx/sites-enabled/default
@@ -34,7 +37,7 @@ COPY nginx.conf /etc/nginx/sites-enabled/default
 You may also want to add only some directives in [existing site config](config/vhost.conf#L5).
 
 ```dockerfile
-COPY custom-config.conf /etc/nginx/conf.d/docker/custom-config.conf 
+COPY custom-config.conf /etc/nginx/conf.d/docker/custom-config.conf
 ```
 
 ## Minimal package included
