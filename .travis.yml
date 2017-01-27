@@ -12,7 +12,7 @@ install:
   # Build image
   - sudo docker build . -t kitpages/symfony:$PHP_VERSION
   # Check installed php version
-  - sudo docker run -it kitpages/symfony:$PHP_VERSION php --version | grep "PHP $PHP_VERSION
+  - sudo docker run -it kitpages/symfony:$PHP_VERSION php --version | grep "PHP $PHP_VERSION"
 
 script:
   - cd tests
