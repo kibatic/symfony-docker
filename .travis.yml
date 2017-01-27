@@ -1,0 +1,16 @@
+---
+language: generic
+# Use the new container infrastructure
+sudo: required
+
+services:
+  - docker
+
+script:
+  # Build image
+  - sudo docker build . -t kitpages/symfony
+  # Check installed php version
+  - sudo docker run -it kitpages/symfony php --version | grep "PHP 7.1"
+
+notifications:
+  email: true
