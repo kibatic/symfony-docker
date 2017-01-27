@@ -3,14 +3,25 @@ language: generic
 # Use the new container infrastructure
 sudo: required
 
+env:
+  PHP_VERSION: 7.1
+
 services:
   - docker
+install:
+  # Build image
+  - sudo docker build . -t kitpages/symfony:$PHP_VERSION
+  # Check installed php version
+  - sudo docker run -it kitpages/symfony:$PHP_VERSION php --version | grep "PHP $PHP_VERSION
 
 script:
-  # Build image
-  - sudo docker build . -t kitpages/symfony
-  # Check installed php version
-  - sudo docker run -it kitpages/symfony php --version | grep "PHP 7.1"
+  - cd tests
+  - sudo docker build . -t kitpages/symfony-demo:$PHP_VERSION
+  - git clone --branch 0.9.8 https://github.com/symfony/symfony-demo symfony
+  - chmod 777 symfony/var/cache symfony/var/logs symfony/var/sessions
+  - sudo docker run --rm -it -v $(pwd)/symfony:/var/www kitpages/symfony:$VERSION composer install
+  - sudo docker run -d -p 8001:80 -v $(pwd)/symfony:/var/www kitpages/symfony:$VERSION
+  - curl -I localhost:8001
 
 notifications:
   email: true
