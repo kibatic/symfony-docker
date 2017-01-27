@@ -2,6 +2,8 @@
 
 # Symfony + Nginx + php-fpm
 
+[![Build Status](https://travis-ci.org/kitpages/symfony-docker.svg?branch=7.1)](https://travis-ci.org/kitpages/symfony-docker)
+
 Docker for Symfony application, powered by **Nginx** and **php-fpm**.
 
 Based on Debian Jessie.
