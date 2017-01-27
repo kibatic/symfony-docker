@@ -1,7 +1,6 @@
 ![symfony-docker](http://i.imgur.com/vc5ZVqL.png?2)
 
 # Symfony + Nginx + php-fpm
-[![Foo](https://badge.imagelayers.io/kitpages/symfony:latest.svg)](https://imagelayers.io/?images=kitpages/symfony:latest)
 
 Docker for Symfony application, powered by **Nginx** and **php-fpm**.
 
@@ -20,7 +19,7 @@ docker pull kitpages/symfony:7.1
 Then run in your symfony folder
 
 ```bash
-docker run -v $(pwd):/var/www -p 8080:80 kitpages/symfony
+docker run -v $(pwd):/var/www -p 8080:80 kitpages/symfony:7.1
 ```
 
 Symfony app will be accessible on http://localhost:8080/app.php
