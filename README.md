@@ -3,6 +3,8 @@
 # Symfony + Nginx + php-fpm
 
 [![Build Status](https://travis-ci.org/kitpages/symfony-docker.svg?branch=7.1)](https://travis-ci.org/kitpages/symfony-docker)
+[![](https://images.microbadger.com/badges/image/kitpages/symfony:7.1.svg)](https://microbadger.com/images/kitpages/symfony:7.1 "Get your own image badge on microbadger.com")
+[![](https://images.microbadger.com/badges/version/kitpages/symfony:7.1.svg)](https://microbadger.com/images/kitpages/symfony:7.1 "Get your own version badge on microbadger.com")
 
 Docker for Symfony application, powered by **Nginx** and **php-fpm**.
 
