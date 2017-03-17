@@ -29,7 +29,7 @@ script:
   - chmod 777 var/cache var/logs var/sessions
   - sudo docker run --rm -v $(pwd):/var/www -v $HOME/.composer:/root/.composer kitpages/symfony-demo:$PHP_VERSION composer install --no-progress
   - sudo docker run -d -p 8001:80 -v $(pwd):/var/www kitpages/symfony-demo:$PHP_VERSION
-  - sleep 20
+  - sleep 10
   - curl -s localhost:8001
   - sudo docker run --rm -v $(pwd):/var/www kitpages/symfony-demo:$PHP_VERSION vendor/bin/phpunit
 
