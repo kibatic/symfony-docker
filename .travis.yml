@@ -4,7 +4,9 @@ language: generic
 sudo: required
 
 env:
-  PHP_VERSION: 5.6
+  - PHP_VERSION: 5.6
+  - PHP_VERSION: 7.0
+  - PHP_VERSION: 7.1
 
 services:
   - docker
@@ -14,6 +16,7 @@ cache:
     - $HOME/.composer
 
 install:
+  - cd $PHP_VERSION
   # Build image
   - sudo docker build . -t kitpages/symfony:$PHP_VERSION
   # Check installed php version
