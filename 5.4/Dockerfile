@@ -2,6 +2,9 @@ FROM debian:wheezy
 
 MAINTAINER Elie Charra <elie.charra [at] kibatic.comr>
 
+# https://getcomposer.org/doc/03-cli.md#composer-allow-superuser
+ENV COMPOSER_ALLOW_SUPERUSER 1
+
 RUN apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get -qq -y --no-install-recommends install \
     supervisor \
     ca-certificates \

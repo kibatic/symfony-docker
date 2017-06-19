@@ -2,10 +2,13 @@ FROM debian:jessie
 
 MAINTAINER Elie Charra <elie.charra [at] kibatic.com>
 
+# https://getcomposer.org/doc/03-cli.md#composer-allow-superuser
+ENV COMPOSER_ALLOW_SUPERUSER 1
+
 RUN apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get -qq -y --no-install-recommends install \
     supervisor \
     ca-certificates \
-    nginx \ 
+    nginx \
     wget &&\
     echo "deb http://packages.dotdeb.org jessie all" > /etc/apt/sources.list.d/dotdeb.list && \
     wget -O- https://www.dotdeb.org/dotdeb.gpg | apt-key add - && \
