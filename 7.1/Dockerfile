@@ -11,7 +11,7 @@ RUN apt-get -qq update > /dev/null && DEBIAN_FRONTEND=noninteractive apt-get -qq
     nginx \
     wget \
     git \
-    apt-transport-https &&\
+    apt-transport-https > /dev/null &&\
     wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg &&\
     echo "deb https://packages.sury.org/php/ jessie main" > /etc/apt/sources.list.d/php.list &&\
     apt-get update -qq > /dev/null &&\
