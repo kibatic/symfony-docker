@@ -5,14 +5,14 @@ MAINTAINER Elie Charra <elie.charra [at] kibatic.com>
 # https://getcomposer.org/doc/03-cli.md#composer-allow-superuser
 ENV COMPOSER_ALLOW_SUPERUSER 1
 
-RUN apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get -qq -y --no-install-recommends install \
+RUN apt-get -qq update > /dev/null && DEBIAN_FRONTEND=noninteractive apt-get -qq -y --no-install-recommends install \
     supervisor \
     ca-certificates \
     nginx \
     wget &&\
     echo "deb http://packages.dotdeb.org jessie all" > /etc/apt/sources.list.d/dotdeb.list && \
     wget -O- https://www.dotdeb.org/dotdeb.gpg | apt-key add - && \
-    apt-get update && \
+    apt-get update > /dev/null && \
     apt-get -qq -y --no-install-recommends install \
     php7.0 \
     php7.0-cli \
@@ -20,7 +20,7 @@ RUN apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get -qq -y --no-ins
     php7.0-xml \
     php7.0-zip \
     php7.0-mbstring \
-    php7.0-fpm &&\
+    php7.0-fpm > /dev/null &&\
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* &&\
     mkdir -p /run/php && \

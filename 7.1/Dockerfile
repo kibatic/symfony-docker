@@ -5,7 +5,7 @@ MAINTAINER Elie Charra <elie.charra [at] kibatic.com>
 # https://getcomposer.org/doc/03-cli.md#composer-allow-superuser
 ENV COMPOSER_ALLOW_SUPERUSER 1
 
-RUN apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get -qq -y --no-install-recommends install \
+RUN apt-get -qq update > /dev/null && DEBIAN_FRONTEND=noninteractive apt-get -qq -y --no-install-recommends install \
     supervisor \
     ca-certificates \
     nginx \
@@ -14,14 +14,14 @@ RUN apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get -qq -y --no-ins
     apt-transport-https &&\
     wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg &&\
     echo "deb https://packages.sury.org/php/ jessie main" > /etc/apt/sources.list.d/php.list &&\
-    apt-get update -qq &&\
+    apt-get update -qq > /dev/null &&\
     DEBIAN_FRONTEND=noninteractive apt-get -qq -y --no-install-recommends install \
     php7.1 \
     php7.1-cli \
     php7.1-intl \
     php7.1-fpm \
     php7.1-xml \
-    php7.1-zip &&\
+    php7.1-zip > /dev/null &&\
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* &&\
     php -r "readfile('https://getcomposer.org/installer');" | php -- \
