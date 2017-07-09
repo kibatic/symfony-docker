@@ -24,7 +24,6 @@ install:
 script:
   - sudo docker build -f $PHP_VERSION/tests/Dockerfile . -t kibatic/symfony-demo:$PHP_VERSION
   - git clone --branch v0.9.8 https://github.com/symfony/symfony-demo symfony; cd symfony
-  - chmod 777 var/cache var/logs var/sessions
   - sudo docker run --rm -v $(pwd):/var/www -v $HOME/.composer:/root/.composer kibatic/symfony-demo:$PHP_VERSION composer install --no-progress
   - sudo docker run -d -p 8001:80 -v $(pwd):/var/www kibatic/symfony-demo:$PHP_VERSION
   - sleep 10
