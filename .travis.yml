@@ -18,20 +18,20 @@ cache:
 install:
   - cd $PHP_VERSION
   # Build image
-  - sudo docker build . -t kitpages/symfony:$PHP_VERSION
+  - sudo docker build . -t kibatic/symfony:$PHP_VERSION
   # Check installed php version
-  - sudo docker run -it kitpages/symfony:$PHP_VERSION php --version | grep "PHP $PHP_VERSION"
+  - sudo docker run -it kibatic/symfony:$PHP_VERSION php --version | grep "PHP $PHP_VERSION"
 
 script:
   - cd tests
-  - sudo docker build . -t kitpages/symfony-demo:$PHP_VERSION
+  - sudo docker build . -t kibatic/symfony-demo:$PHP_VERSION
   - git clone --branch v0.9.8 https://github.com/symfony/symfony-demo symfony; cd symfony
   - chmod 777 var/cache var/logs var/sessions
-  - sudo docker run --rm -v $(pwd):/var/www -v $HOME/.composer:/root/.composer kitpages/symfony-demo:$PHP_VERSION composer install --no-progress
-  - sudo docker run -d -p 8001:80 -v $(pwd):/var/www kitpages/symfony-demo:$PHP_VERSION
+  - sudo docker run --rm -v $(pwd):/var/www -v $HOME/.composer:/root/.composer kibatic/symfony-demo:$PHP_VERSION composer install --no-progress
+  - sudo docker run -d -p 8001:80 -v $(pwd):/var/www kibatic/symfony-demo:$PHP_VERSION
   - sleep 10
   - curl -s localhost:8001 | grep -q "Welcome to the <strong>Symfony Demo</strong> application"
-  - sudo docker run --rm -v $(pwd):/var/www kitpages/symfony-demo:$PHP_VERSION vendor/bin/phpunit
+  - sudo docker run --rm -v $(pwd):/var/www kibatic/symfony-demo:$PHP_VERSION vendor/bin/phpunit
 
 notifications:
   email: true
