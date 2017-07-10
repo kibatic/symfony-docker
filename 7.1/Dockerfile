@@ -32,9 +32,8 @@ RUN apt-get -qq update > /dev/null && DEBIAN_FRONTEND=noninteractive apt-get -qq
     echo "daemon off;" >> /etc/nginx/nginx.conf &&\
     mkdir -p /run/php
 
-COPY config/vhost.conf /etc/nginx/sites-enabled/default
-COPY config/logs.conf /etc/nginx/conf.d/docker/logs.conf
-COPY config/supervisord/conf.d /etc/supervisor/conf.d
+COPY rootfs /
+COPY 7.1/rootfs /
 
 WORKDIR /var/www
 
