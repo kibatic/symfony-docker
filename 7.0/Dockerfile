@@ -38,4 +38,4 @@ WORKDIR /var/www
 
 EXPOSE 80
 
-CMD ["/usr/bin/supervisord", "-n"]
+CMD ["/entrypoint.sh"]
