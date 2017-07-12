@@ -32,7 +32,6 @@ RUN apt-get -qq update > /dev/null && DEBIAN_FRONTEND=noninteractive apt-get -qq
     echo "daemon off;" >> /etc/nginx/nginx.conf
 
 COPY rootfs /
-COPY 7.0/rootfs /
 
 WORKDIR /var/www
 

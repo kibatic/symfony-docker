@@ -33,7 +33,6 @@ RUN apt-get -qq update > /dev/null && DEBIAN_FRONTEND=noninteractive apt-get -qq
     mkdir -p /run/php
 
 COPY rootfs /
-COPY 7.1/rootfs /
 
 WORKDIR /var/www
 
