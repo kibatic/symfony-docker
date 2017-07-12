@@ -16,13 +16,14 @@ cache:
     - $HOME/.composer
 
 install:
+  - cd $PHP_VERSION
   # Build image
-  - sudo docker build -f $PHP_VERSION/Dockerfile . -t kibatic/symfony:$PHP_VERSION
+  - sudo docker build . -t kibatic/symfony:$PHP_VERSION
   # Check installed php version
   - sudo docker run -it kibatic/symfony:$PHP_VERSION php --version | grep "PHP $PHP_VERSION"
 
 script:
-  - sudo docker build -f $PHP_VERSION/tests/Dockerfile . -t kibatic/symfony-demo:$PHP_VERSION
+  - sudo docker build -f tests/Dockerfile . -t kibatic/symfony-demo:$PHP_VERSION
   - git clone --branch v0.9.8 https://github.com/symfony/symfony-demo symfony; cd symfony
   - sudo docker run --rm -v $(pwd):/var/www -v $HOME/.composer:/root/.composer kibatic/symfony-demo:$PHP_VERSION composer install --no-progress
   - sudo docker run -d -p 8001:80 -v $(pwd):/var/www kibatic/symfony-demo:$PHP_VERSION
