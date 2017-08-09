@@ -53,9 +53,10 @@ COPY custom-config.conf /etc/nginx/conf.d/docker/custom-config.conf
 ### Minimal package included
 
 * nginx
-* php5-fpm
-* php5-cli
-* php5-intl
+* php\*-fpm
+* php\*-cli
+* php\*-intl
+* php\*-mbstring
 
 ### Exposed port
 * 80 : nginx

@@ -9,6 +9,7 @@ RUN apt-get -qq update > /dev/null && DEBIAN_FRONTEND=noninteractive apt-get -qq
     supervisor \
     ca-certificates \
     nginx \
+    git \
     php5 \
     php5-cli \
     php5-intl \

@@ -10,7 +10,6 @@ RUN apt-get -qq update > /dev/null && DEBIAN_FRONTEND=noninteractive apt-get -qq
     ca-certificates \
     nginx \
     wget \
-    git \
     apt-transport-https > /dev/null &&\
     wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg &&\
     echo "deb https://packages.sury.org/php/ jessie main" > /etc/apt/sources.list.d/php.list &&\
@@ -21,6 +20,7 @@ RUN apt-get -qq update > /dev/null && DEBIAN_FRONTEND=noninteractive apt-get -qq
     php7.1-intl \
     php7.1-fpm \
     php7.1-xml \
+    php7.1-mbstring \
     php7.1-zip > /dev/null &&\
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* &&\
