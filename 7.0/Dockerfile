@@ -9,6 +9,7 @@ RUN apt-get -qq update > /dev/null && DEBIAN_FRONTEND=noninteractive apt-get -qq
     supervisor \
     ca-certificates \
     nginx \
+    git \
     wget > /dev/null &&\
     echo "deb http://packages.dotdeb.org jessie all" > /etc/apt/sources.list.d/dotdeb.list && \
     wget -O- https://www.dotdeb.org/dotdeb.gpg | apt-key add - && \
