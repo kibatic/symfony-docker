@@ -28,7 +28,7 @@ script:
   - sudo docker run --rm -v $(pwd):/var/www -v $HOME/.composer:/root/.composer kibatic/symfony-demo:$PHP_VERSION composer install --no-progress
   - sudo docker run -d -p 8001:80 -v $(pwd):/var/www kibatic/symfony-demo:$PHP_VERSION
   - sleep 10
-  - sudo docker run --rm -v $(pwd):/var/www kibatic/symfony-demo:$PHP_VERSION vendor/bin/phpunit
+  - sudo docker run --rm -v $(pwd):/var/www kibatic/symfony-demo:$PHP_VERSION vendor/bin/simple-phpunit
   - curl -s localhost:8001 | grep -q "Welcome to the <strong>Symfony Demo</strong> application"
 
 notifications:
