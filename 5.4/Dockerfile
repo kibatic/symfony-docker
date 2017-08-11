@@ -1,6 +1,6 @@
 FROM debian:wheezy
 
-MAINTAINER Elie Charra <elie.charra [at] kibatic.comr>
+MAINTAINER Elie Charra <elie.charra [at] kibatic.com>
 
 # https://getcomposer.org/doc/03-cli.md#composer-allow-superuser
 ENV COMPOSER_ALLOW_SUPERUSER 1
