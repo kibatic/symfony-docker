@@ -44,7 +44,7 @@ If you want to replace the default nginx settings, overwrite configuration file 
 COPY nginx.conf /etc/nginx/sites-enabled/default
 ```
 
-You may also want to add only some directives in [existing site config](config/vhost.conf#L5).
+You may also want to add only some directives in [existing site config](7.1/rootfs/etc/nginx/sites-enabled/default#L5).
 
 ```dockerfile
 COPY custom-config.conf /etc/nginx/conf.d/docker/custom-config.conf
