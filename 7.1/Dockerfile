@@ -27,7 +27,6 @@ RUN apt-get -qq update > /dev/null && DEBIAN_FRONTEND=noninteractive apt-get -qq
     php -r "readfile('https://getcomposer.org/installer');" | php -- \
              --install-dir=/usr/local/bin \
              --filename=composer &&\
-    echo 'clear_env = no' >> /etc/php/7.1/fpm/pool.d/www.conf &&\
     sed -i -e "s/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g" /etc/php/7.1/fpm/php.ini &&\
     echo "daemon off;" >> /etc/nginx/nginx.conf &&\
     mkdir -p /run/php
