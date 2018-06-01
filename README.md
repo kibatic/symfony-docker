@@ -52,6 +52,34 @@ You may also want to add only some directives in [existing site config](7.1/root
 COPY custom-config.conf /etc/nginx/conf.d/docker/custom-config.conf
 ```
 
+### Logging
+
+A common practice is to log to stdout, but there are major bug in php-fpm wich makes stdout logging not reliable  :
+
+* Logs are truncated when message length exceed 1024 https://bugs.php.net/bug.php?id=69031
+* FPM prepend a warning string to worker output https://bugs.php.net/bug.php?id=71880
+
+This image setup a known workaround ([see here](https://github.com/docker-library/php/issues/207)) and expose a log stream as env var **LOG_STREAM**, but **you cannot log to stdout**
+For a proper logging you have to configure monolog to log to this stream
+
+```yaml
+# app/config_dev.yml
+monolog:
+    handlers:
+        main:
+            type:   stream
+            path:   '/tmp/stdout'
+            level:  debug
+```
+
+You can also use symfony `%env(LOG_STREAM)%` if your symfony version is compatible with [this syntax](https://symfony.com/doc/3.4/configuration/external_parameters.html)
+
+We also provide a default dirty solution for standard monolog configuration, **this is not recommended in production**
+
+```bash
+tail -q -n 0 -F app/logs/dev.log app/logs/prod.log var/logs/dev.log var/logs/prod.log
+```
+
 ### Minimal package included
 
 * nginx
