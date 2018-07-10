@@ -24,6 +24,9 @@ RUN apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get -qq -y --no-ins
 
 COPY rootfs /
 
+ENV LOG_STREAM="/tmp/stdout"
+RUN mkfifo $LOG_STREAM && chmod 777 $LOG_STREAM
+
 WORKDIR /var/www
 
 EXPOSE 80
