@@ -1,4 +1,4 @@
-FROM debian:jessie
+FROM debian:stretch
 
 MAINTAINER Elie Charra <elie.charra [at] kibatic.com>
 
@@ -10,11 +10,6 @@ RUN apt-get -qq update > /dev/null && DEBIAN_FRONTEND=noninteractive apt-get -qq
     ca-certificates \
     nginx \
     git \
-    wget > /dev/null &&\
-    echo "deb http://packages.dotdeb.org jessie all" > /etc/apt/sources.list.d/dotdeb.list && \
-    wget -O- https://www.dotdeb.org/dotdeb.gpg | apt-key add - && \
-    apt-get update > /dev/null && \
-    apt-get -qq -y --no-install-recommends install \
     php7.0 \
     php7.0-cli \
     php7.0-intl \
