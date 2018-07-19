@@ -19,14 +19,12 @@ RUN apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get -qq -y --no-ins
     php -r "readfile('https://getcomposer.org/installer');" | php -- \
              --install-dir=/usr/local/bin \
              --filename=composer &&\
-    echo '[www]' > /etc/php/5.4/fpm/pool.d/www_kibatic.conf &&\
-    echo 'clear_env = no' >> /etc/php/5.4/fpm/pool.d/www_kibatic.conf &&\
     sed -i -e "s/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g" /etc/php5/fpm/php.ini &&\
     echo "daemon off;" >> /etc/nginx/nginx.conf
 
-COPY config/vhost.conf /etc/nginx/sites-enabled/default
-COPY config/logs.conf /etc/nginx/conf.d/docker/logs.conf
-COPY config/supervisord/conf.d /etc/supervisor/conf.d
+COPY rootfs /
+
+RUN mkfifo $LOG_STREAM && chmod 777 /tmp/stdout
 
 WORKDIR /var/www
 
