@@ -24,7 +24,7 @@ RUN apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get -qq -y --no-ins
 
 COPY rootfs /
 
-RUN mkfifo $LOG_STREAM && chmod 777 /tmp/stdout
+RUN mkfifo /tmp/stdout && chmod 777 /tmp/stdout
 
 WORKDIR /var/www
 
