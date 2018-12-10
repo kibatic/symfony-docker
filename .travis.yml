@@ -4,8 +4,6 @@ language: generic
 sudo: required
 
 env:
-  - PHP_VERSION: 5.6
-  - PHP_VERSION: 7.0
   - PHP_VERSION: 7.1
   - PHP_VERSION: 7.2
 
