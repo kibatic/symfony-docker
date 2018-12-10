@@ -16,7 +16,9 @@ If you are experiencing some issues, take a look at [TROUBLESHOOTING](TROUBLESHO
 
 Image tags follows PHP versions
 
-`latest` `7` `7.2` [(7.2/Dockerfile)](https://github.com/kibatic/symfony-docker/blob/master/7.2/Dockerfile)
+`latest` `7` `7.3` [(7.3/Dockerfile)](https://github.com/kibatic/symfony-docker/blob/master/7.3/Dockerfile)
+
+`7.2` [(7.2/Dockerfile)](https://github.com/kibatic/symfony-docker/blob/master/7.2/Dockerfile)
 
 `7.1` [(7.1/Dockerfile)](https://github.com/kibatic/symfony-docker/blob/master/7.1/Dockerfile)
 
@@ -28,8 +30,6 @@ Image tags follows PHP versions
 
 ### Compatibility matrix
 
-Nginx configuration changes for Symfony 4, here is the compatiblity matrix.
-
 <table>
     <thead>
         <tr>
@@ -39,11 +39,17 @@ Nginx configuration changes for Symfony 4, here is the compatiblity matrix.
     </thead>
     <tbody>
         <tr>
-            <th rowspan="5">Image</th>
+            <th rowspan="6">Image</th>
             <td></td>
             <td>2.x</td>
             <td>3.x</td>
             <td>4.x</td>
+        </tr>
+        <tr>
+            <td>7.3</td>
+            <td>:heavy_check_mark: (not tested)</td>
+            <td>:heavy_check_mark: (not tested)</td>
+            <td>:heavy_check_mark: (default)</td>
         </tr>
         <tr>
             <td>7.2</td>
@@ -81,11 +87,17 @@ docker pull kibatic/symfony
 Then run in your symfony folder
 
 ```bash
-# Symfony 2.x, 3.x
-docker run -v $(pwd):/var/www -p 8080:80 kibatic/symfony
+# Image >= 7.3 & Symfony 2.x, 3.x
+docker run -e SYMFONY_VERSION=3 -v $(pwd):/var/www -p 8080:80 kibatic/symfony:7.3
 
-# Symfony 4.x
-docker run -e SYMFONY_VERSION=4 -v $(pwd):/var/www -p 8080:80 kibatic/symfony
+# Image >= 7.3 & Symfony 4.x
+docker run -v $(pwd):/var/www -p 8080:80 kibatic/symfony:7.3
+
+# Image < 7.3 & Symfony 2.x, 3.x
+docker run -v $(pwd):/var/www -p 8080:80 kibatic/symfony:7.2
+
+# Image < 7.3 & Symfony 4.x
+docker run -e SYMFONY_VERSION=4 -v $(pwd):/var/www -p 8080:80 kibatic/symfony:7.2
 ```
 
 Symfony app will be accessible on http://localhost:8080/
@@ -98,13 +110,37 @@ If you want to replace the default nginx settings, overwrite configuration file 
 COPY nginx.conf /etc/nginx/sites-enabled/default
 ```
 
-You may also want to add only some directives in [existing site config](7.1/rootfs/etc/nginx/sites-enabled/default#L5).
+You may also want to add only some directives in [existing site config](7.3/rootfs/etc/nginx/sites-enabled/default#L5).
 
 ```dockerfile
 COPY custom-config.conf /etc/nginx/conf.d/docker/custom-config.conf
 ```
 
-### Logging
+### Logging (PHP >= 7.3)
+
+For both production and dev environment you should log to stdout / stderr, example below.
+
+```yaml
+# config/packages/monolog.yaml
+monolog:
+    handlers:
+        stdout:
+            type: stream
+            path: 'php://stdout'
+            level: debug
+            channels: ['!event']
+            # (Optional) format logs to json
+            #formatter: monolog.formatter.json
+        stderr:
+            type: stream
+            path: 'php://stderr'
+            level: error
+            # (Optional) format logs to json
+            #formatter: monolog.formatter.json
+```
+
+
+### Logging (PHP < 7.3)
 
 A common practice is to log to stdout, but there are major bug in php-fpm wich makes stdout logging not reliable  :
 
