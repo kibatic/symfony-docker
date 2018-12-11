@@ -4,8 +4,10 @@ language: generic
 sudo: required
 
 env:
-  - PHP_VERSION: 7.1
-  - PHP_VERSION: 7.2
+  - PHP_VERSION=7.1 SYMFONY_VERSION=3
+  - PHP_VERSION=7.1 SYMFONY_VERSION=4
+  - PHP_VERSION=7.2 SYMFONY_VERSION=3
+  - PHP_VERSION=7.2 SYMFONY_VERSION=4
 
 services:
   - docker
@@ -20,14 +22,15 @@ install:
   - sudo docker build . -t kibatic/symfony:$PHP_VERSION
   # Check installed php version
   - sudo docker run -it kibatic/symfony:$PHP_VERSION php --version | grep "PHP $PHP_VERSION"
+  - sudo docker build -f tests/Dockerfile . -t kibatic/symfony-demo:$PHP_VERSION
+  - export SYMFONY_DEMO_VERSION=$([ "$SYMFONY_VERSION" = "4" ] && echo "v1.3.1" || echo "v1.0.5")
 
 script:
-  - sudo docker build -f tests/Dockerfile . -t kibatic/symfony-demo:$PHP_VERSION
-  - git clone --branch v1.0.5 https://github.com/symfony/symfony-demo symfony; cd symfony
-  - sudo docker run --rm -v $(pwd):/var/www -v $HOME/.composer:/root/.composer kibatic/symfony-demo:$PHP_VERSION composer install --no-progress
-  - sudo docker run -d -p 8001:80 -v $(pwd):/var/www kibatic/symfony-demo:$PHP_VERSION
+  - git clone --branch $SYMFONY_DEMO_VERSION https://github.com/symfony/symfony-demo symfony; cd symfony
+  - sudo docker run --rm -v $(pwd):/var/www -v $HOME/.composer:/root/.composer kibatic/symfony-demo:$PHP_VERSION composer install --no-progress || true
+  - sudo docker run -d -p 8001:80 -e SYMFONY_VERSION=$SYMFONY_VERSION -v $(pwd):/var/www kibatic/symfony-demo:$PHP_VERSION
   - sleep 10
-  - sudo docker run --rm -e SYMFONY_PHPUNIT_VERSION=5.7.27 -v $(pwd):/var/www kibatic/symfony-demo:$PHP_VERSION vendor/bin/simple-phpunit
+  - sudo docker run --rm $( (( "$SYMFONY_DEMO_VERSION" = "v1.0.5" )) && printf %s "-e SYMFONY_PHPUNIT_VERSION=5.7.27" ) -e SYMFONY_DEPRECATIONS_HELPER=disabled -v $(pwd):/var/www kibatic/symfony-demo:$PHP_VERSION vendor/bin/simple-phpunit
   - curl -s localhost:8001 | grep -q "Welcome to the <strong>Symfony Demo</strong> application"
 
 notifications:

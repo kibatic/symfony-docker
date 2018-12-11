@@ -14,6 +14,8 @@ If you are experiencing some issues, take a look at [TROUBLESHOOTING](TROUBLESHO
 
 ### Supported tags and respective `Dockerfile` links
 
+Image tags follows PHP versions
+
 `latest` `7` `7.2` [(7.2/Dockerfile)](https://github.com/kibatic/symfony-docker/blob/master/7.2/Dockerfile)
 
 `7.1` [(7.1/Dockerfile)](https://github.com/kibatic/symfony-docker/blob/master/7.1/Dockerfile)
@@ -24,6 +26,52 @@ If you are experiencing some issues, take a look at [TROUBLESHOOTING](TROUBLESHO
 
 `5.4` **Not maintained, END OF LIFE**
 
+### Compatibility matrix
+
+Nginx configuration changes for Symfony 4, here is the compatiblity matrix.
+
+<table>
+    <thead>
+        <tr>
+            <th></th>
+            <th colspan="4">Symfony</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th rowspan="5">Image</th>
+            <td></td>
+            <td>2.x</td>
+            <td>3.x</td>
+            <td>4.x</td>
+        </tr>
+        <tr>
+            <td>7.2</td>
+            <td>:heavy_check_mark: (not tested)</td>
+            <td>:heavy_check_mark:</td>
+            <td>:heavy_check_mark:</td>
+        </tr>
+        <tr>
+            <td>7.1</td>
+            <td>:heavy_check_mark: (not tested)</td>
+            <td>:heavy_check_mark:</td>
+            <td>:heavy_check_mark:</td>
+        </tr>
+        <tr>
+            <td>7.0</td>
+            <td>:heavy_check_mark: (not tested)</td>
+            <td>:heavy_check_mark: (not tested)</td>
+            <td>:x:</td>
+        </tr>
+        <tr>
+            <td>5.6</td>
+            <td>:heavy_check_mark: (not tested)</td>
+            <td>:heavy_check_mark: (not tested)</td>
+            <td>:x:</td>
+        </tr>
+    </tbody>
+</table>
+
 ### Usage
 
 ```bash
@@ -33,10 +81,14 @@ docker pull kibatic/symfony
 Then run in your symfony folder
 
 ```bash
+# Symfony 2.x, 3.x
 docker run -v $(pwd):/var/www -p 8080:80 kibatic/symfony
+
+# Symfony 4.x
+docker run -e SYMFONY_VERSION=4 -v $(pwd):/var/www -p 8080:80 kibatic/symfony
 ```
 
-Symfony app will be accessible on http://localhost:8080/app.php
+Symfony app will be accessible on http://localhost:8080/
 
 ### Custom nginx configuration
 

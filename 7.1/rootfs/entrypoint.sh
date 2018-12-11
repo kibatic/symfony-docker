@@ -12,4 +12,14 @@ for dir in "${RW_FOLDERS[@]}"; do
   fi
 done
 
+NGINX_CONFIG=symfony3
+if [[ "$SYMFONY_VERSION" = "4" ]]
+then
+  NGINX_CONFIG=symfony4
+fi
+
+rm /etc/nginx/sites-enabled/default
+ln -s /etc/nginx/sites-available/$NGINX_CONFIG.conf /etc/nginx/sites-enabled/default
+
+
 exec /usr/bin/supervisord -n
