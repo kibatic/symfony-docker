@@ -17,7 +17,12 @@ then
   NGINX_CONFIG=symfony3
 fi
 
-rm /etc/nginx/sites-enabled/default
-ln -s /etc/nginx/sites-available/$NGINX_CONFIG.conf /etc/nginx/sites-enabled/default
+# Avoid to remove a bind mounted nginx config
+NGINX_DEFAULT=/etc/nginx/sites-enabled/default
+if ! mountpoint -q $NGINX_DEFAULT; then
+  echo "Using default nginx config : $NGINX_CONFIG"
+  rm $NGINX_DEFAULT
+  ln -s /etc/nginx/sites-available/$NGINX_CONFIG.conf $NGINX_DEFAULT
+fi
 
 exec /usr/bin/supervisord -n
