@@ -15,6 +15,7 @@ RUN apt-get -qq update > /dev/null && DEBIAN_FRONTEND=noninteractive apt-get -qq
     echo "deb https://packages.sury.org/php/ stretch main" > /etc/apt/sources.list.d/php.list &&\
     apt-get update -qq > /dev/null &&\
     DEBIAN_FRONTEND=noninteractive apt-get -qq -y --no-install-recommends install \
+    unzip \
     php7.2 \
     php7.2-cli \
     php7.2-intl \
