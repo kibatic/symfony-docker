@@ -10,6 +10,7 @@ RUN apt-get -qq update > /dev/null && DEBIAN_FRONTEND=noninteractive apt-get -qq
     ca-certificates \
     nginx \
     git \
+    unzip \
     php7.0 \
     php7.0-cli \
     php7.0-intl \
