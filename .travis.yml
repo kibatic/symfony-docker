@@ -29,10 +29,16 @@ install:
 script:
   - git clone --branch $SYMFONY_DEMO_VERSION https://github.com/symfony/symfony-demo symfony; cd symfony
   - sudo docker run --rm -v $(pwd):/var/www -v $HOME/.composer:/root/.composer kibatic/symfony-demo:$PHP_VERSION composer install --no-progress || true
-  - sudo docker run -d -p 8001:80 -e SYMFONY_VERSION=$SYMFONY_VERSION -v $(pwd):/var/www kibatic/symfony-demo:$PHP_VERSION
+  - sudo docker run --rm --name symfony -d -p 8001:80 -e SYMFONY_VERSION=$SYMFONY_VERSION -v $(pwd):/var/www kibatic/symfony-demo:$PHP_VERSION
   - sleep 10
-  - sudo docker run --rm $( (( "$SYMFONY_DEMO_VERSION" = "v1.0.5" )) && printf %s "-e SYMFONY_PHPUNIT_VERSION=5.7.27" ) -e SYMFONY_DEPRECATIONS_HELPER=disabled -v $(pwd):/var/www kibatic/symfony-demo:$PHP_VERSION vendor/bin/simple-phpunit
-  - curl -s localhost:8001 | grep -q "Welcome to the <strong>Symfony Demo</strong> application"
+  - sudo docker run --rm $( if [ "$SYMFONY_DEMO_VERSION" == "v1.0.5" ]; then printf %s "-e SYMFONY_PHPUNIT_VERSION=5.7.27"; fi; ) -e SYMFONY_DEPRECATIONS_HELPER=disabled -v $(pwd):/var/www kibatic/symfony-demo:$PHP_VERSION vendor/bin/simple-phpunit
+  - curl -s localhost:8001 | grep -q "Symfony Demo application"
+  - if [ "$SYMFONY_VERSION" = "4" ]; then curl -s localhost:8001/_profiler/phpinfo | grep 'opcache.validate_timestamps</td><td class="v">On</td><td class="v">On</td>'; fi;
+  - docker kill symfony
+  - sudo docker run -e PERFORMANCE_OPTIM=true --rm --name symfony -d -p 8001:80 -e SYMFONY_VERSION=$SYMFONY_VERSION -v $(pwd):/var/www kibatic/symfony-demo:$PHP_VERSION
+  - sleep 10
+  - curl -s localhost:8001 | grep -q "Symfony Demo application"
+  - if [ "$SYMFONY_VERSION" = "4" ]; then curl -s localhost:8001/_profiler/phpinfo | grep 'opcache.validate_timestamps</td><td class="v">Off</td><td class="v">Off</td>'; fi
 
 notifications:
   email: true
