@@ -26,4 +26,12 @@ if ! mountpoint -q $NGINX_DEFAULT; then
   ln -s /etc/nginx/sites-available/$NGINX_CONFIG.conf $NGINX_DEFAULT
 fi
 
+# Disable opcache optimisation for developpement
+# Allow files to be reloaded when update without restarting fpm process
+if [[ "$PERFORMANCE_OPTIM" = "false" ]]
+then
+  echo "Disable performance optimisation"
+  echo > /etc/php/7.2/fpm/conf.d/99-symfony.ini
+fi
+
 exec /usr/bin/supervisord -n
