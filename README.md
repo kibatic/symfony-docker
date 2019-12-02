@@ -16,7 +16,10 @@ If you are experiencing some issues, take a look at [TROUBLESHOOTING](TROUBLESHO
 
 Image tags follows PHP versions
 
-`latest` `7` `7.3` [(7.3/Dockerfile)](https://github.com/kibatic/symfony-docker/blob/master/7.3/Dockerfile)
+
+`latest` `7` `7.4` [(7.4/Dockerfile)](https://github.com/kibatic/symfony-docker/blob/master/7.4/Dockerfile)
+
+`7.3` [(7.3/Dockerfile)](https://github.com/kibatic/symfony-docker/blob/master/7.3/Dockerfile)
 
 `7.2` [(7.2/Dockerfile)](https://github.com/kibatic/symfony-docker/blob/master/7.2/Dockerfile)
 
@@ -34,45 +37,58 @@ Image tags follows PHP versions
     <thead>
         <tr>
             <th></th>
-            <th colspan="4">Symfony</th>
+            <th colspan="5">Symfony</th>
         </tr>
     </thead>
     <tbody>
         <tr>
-            <th rowspan="6">Image</th>
+            <th rowspan="7">Image</th>
             <td></td>
             <td>2.x</td>
             <td>3.x</td>
             <td>4.x</td>
+            <td>5.x</td>
+        </tr>
+        <tr>
+            <td>7.4</td>
+            <td>:x:</td>
+            <td>:x:</td>
+            <td>:heavy_check_mark: (not tested)</td>
+            <td>:heavy_check_mark: (default)</td>
         </tr>
         <tr>
             <td>7.3</td>
             <td>:heavy_check_mark: (not tested)</td>
             <td>:heavy_check_mark: (not tested)</td>
             <td>:heavy_check_mark: (default)</td>
+            <td>:heavy_check_mark: (not tested)</td>
         </tr>
         <tr>
             <td>7.2</td>
             <td>:heavy_check_mark: (not tested)</td>
             <td>:heavy_check_mark:</td>
             <td>:heavy_check_mark:</td>
+            <td>:heavy_check_mark: (not tested)</td>
         </tr>
         <tr>
             <td>7.1</td>
             <td>:heavy_check_mark: (not tested)</td>
             <td>:heavy_check_mark:</td>
             <td>:heavy_check_mark:</td>
+            <td>:x:</td>
         </tr>
         <tr>
             <td>7.0</td>
             <td>:heavy_check_mark: (not tested)</td>
             <td>:heavy_check_mark: (not tested)</td>
             <td>:x:</td>
+            <td>:x:</td>
         </tr>
         <tr>
             <td>5.6</td>
             <td>:heavy_check_mark: (not tested)</td>
             <td>:heavy_check_mark: (not tested)</td>
+            <td>:x:</td>
             <td>:x:</td>
         </tr>
     </tbody>
@@ -110,7 +126,7 @@ If you want to replace the default nginx settings, overwrite configuration file 
 COPY nginx.conf /etc/nginx/sites-enabled/default
 ```
 
-You may also want to add only some directives in [existing site config](7.3/rootfs/etc/nginx/sites-enabled/default#L5).
+You may also want to add only some directives in [existing site config](7.4/rootfs/etc/nginx/sites-enabled/default#L5).
 
 ```dockerfile
 COPY custom-config.conf /etc/nginx/conf.d/docker/custom-config.conf
