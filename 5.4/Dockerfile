@@ -5,7 +5,9 @@ MAINTAINER Elie Charra <elie.charra [at] kibatic.com>
 # https://getcomposer.org/doc/03-cli.md#composer-allow-superuser
 ENV COMPOSER_ALLOW_SUPERUSER 1
 
-RUN apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get -qq -y --no-install-recommends install \
+COPY rootfs /
+
+RUN apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get -qq -y --force-yes --no-install-recommends install \
     supervisor \
     ca-certificates \
     nginx \
@@ -21,8 +23,6 @@ RUN apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get -qq -y --no-ins
              --filename=composer &&\
     sed -i -e "s/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g" /etc/php5/fpm/php.ini &&\
     echo "daemon off;" >> /etc/nginx/nginx.conf
-
-COPY rootfs /
 
 RUN mkfifo /tmp/stdout && chmod 777 /tmp/stdout
 
