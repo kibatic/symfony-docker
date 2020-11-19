@@ -43,11 +43,18 @@ Image tags follows PHP versions
     <tbody>
         <tr>
             <th rowspan="7">Image</th>
-            <td></td>
-            <td>2.x</td>
-            <td>3.x</td>
-            <td>4.x</td>
-            <td>5.x</td>
+            <th></td>
+            <th>2.x</td>
+            <th>3.x</td>
+            <th>4.x</td>
+            <th>5.x</td>
+        </tr>
+        <tr>
+            <td>8.0</td>
+            <td>:x: (not tested)</td>
+            <td>:x: (not tested)</td>
+            <td>:x: (not tested)</td>
+            <td>:heavy_check_mark: (default)</td>
         </tr>
         <tr>
             <td>7.4</td>

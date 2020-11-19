@@ -1,6 +1,6 @@
 FROM debian:jessie
 
-MAINTAINER Elie Charra <elie.charra [at] kibatic.com>
+LABEL maintainer="Kibatic system@kibatic.com"
 
 # https://getcomposer.org/doc/03-cli.md#composer-allow-superuser
 ENV COMPOSER_ALLOW_SUPERUSER 1
