@@ -33,6 +33,8 @@ RUN apt-get -qq update > /dev/null && DEBIAN_FRONTEND=noninteractive apt-get -qq
     echo "daemon off;" >> /etc/nginx/nginx.conf &&\
     mkdir -p /run/php
 
+RUN composer self-update 1.10.17
+
 COPY rootfs /
 
 ENV LOG_STREAM="/var/stdout"

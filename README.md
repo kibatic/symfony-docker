@@ -94,6 +94,15 @@ Image tags follows PHP versions
     </tbody>
 </table>
 
+Composer versions :
+
+- 5.4 : 1.10.17
+- 7.0 : 1.10.17
+- 7.1 : 1.10.17
+- 7.2 : 1.10.17
+- 7.3 : 1.10.17
+- 7.4 : 2.x
+
 ### Usage
 
 ```bash
