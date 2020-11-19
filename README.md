@@ -53,7 +53,7 @@ Image tags follows PHP versions
             <td>7.4</td>
             <td>:x:</td>
             <td>:x:</td>
-            <td>:heavy_check_mark: (not tested)</td>
+            <td>:heavy_check_mark:</td>
             <td>:heavy_check_mark: (default)</td>
         </tr>
         <tr>
