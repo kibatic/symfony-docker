@@ -23,7 +23,7 @@ Image tags follows PHP versions
 
 `7.2` [(7.2/Dockerfile)](https://github.com/kibatic/symfony-docker/blob/master/7.2/Dockerfile)
 
-`7.1` [(7.1/Dockerfile)](https://github.com/kibatic/symfony-docker/blob/master/7.1/Dockerfile)
+`7.1` **Not maintained, END OF LIFE**
 
 `7.0` **Not maintained, END OF LIFE**
 
@@ -96,12 +96,9 @@ Image tags follows PHP versions
 
 Composer versions :
 
-- 5.4 : 1.10.17
-- 7.0 : 1.10.17
-- 7.1 : 1.10.17
-- 7.2 : 1.10.17
-- 7.3 : 1.10.17
 - 7.4 : 2.x
+- 7.3 : 1.10.17
+- 7.2 : 1.10.17
 
 ### Usage
 
