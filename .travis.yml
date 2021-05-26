@@ -20,6 +20,7 @@ cache:
 
 install:
   - cd $PHP_VERSION
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   # Build image
   - sudo docker build . -t kibatic/symfony:$PHP_VERSION
   # Check installed php version
