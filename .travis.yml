@@ -30,6 +30,7 @@ install:
   - export SYMFONY_DEMO_VERSION="v1.0.5"
   - if [ "$SYMFONY_VERSION" = "4" ]; then export SYMFONY_DEMO_VERSION="v1.4.4"; fi
   - if [ "$SYMFONY_VERSION" = "5" ]; then export SYMFONY_DEMO_VERSION="v1.6.4"; fi
+  - if [ "$SYMFONY_VERSION" = "5" -a "$PHP_VERSION" = "8.0" ]; then export SYMFONY_DEMO_VERSION="main"; fi
 
 script:
   - git clone https://github.com/symfony/symfony-demo symfony; cd symfony; git checkout $SYMFONY_DEMO_VERSION
