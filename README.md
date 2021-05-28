@@ -16,8 +16,9 @@ If you are experiencing some issues, take a look at [TROUBLESHOOTING](TROUBLESHO
 
 Image tags follows PHP versions
 
+`latest` `8` `8.0` [(8.0/Dockerfile)](https://github.com/kibatic/symfony-docker/blob/master/8.0/Dockerfile)
 
-`latest` `7` `7.4` [(7.4/Dockerfile)](https://github.com/kibatic/symfony-docker/blob/master/7.4/Dockerfile)
+`7` `7.4` [(7.4/Dockerfile)](https://github.com/kibatic/symfony-docker/blob/master/7.4/Dockerfile)
 
 `7.3` [(7.3/Dockerfile)](https://github.com/kibatic/symfony-docker/blob/master/7.3/Dockerfile)
 
@@ -42,12 +43,19 @@ Image tags follows PHP versions
     </thead>
     <tbody>
         <tr>
-            <th rowspan="7">Image</th>
+            <th rowspan="8">Image</th>
             <td></td>
             <td>2.x</td>
             <td>3.x</td>
             <td>4.x</td>
             <td>5.x</td>
+        </tr>
+        <tr>
+            <td>7.4</td>
+            <td>:x:</td>
+            <td>:x:</td>
+            <td>:heavy_check_mark: (not tested)</td>
+            <td>:heavy_check_mark: (default)</td>
         </tr>
         <tr>
             <td>7.4</td>
@@ -96,6 +104,7 @@ Image tags follows PHP versions
 
 Composer versions :
 
+- 8.0 : 2.x
 - 7.4 : 2.x
 - 7.3 : 1.10.17
 - 7.2 : 1.10.17
