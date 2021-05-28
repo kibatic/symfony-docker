@@ -20,8 +20,6 @@ cache:
 
 install:
   - cd $PHP_VERSION
-  - echo ${DOCKER_USERNAME}
-  - echo ${DOCKER_PASSWORD:1:3}
   - echo ${DOCKER_PASSWORD} | docker login --username ${DOCKER_USERNAME} --password-stdin
   # Build image
   - sudo docker build . -t kibatic/symfony:$PHP_VERSION
