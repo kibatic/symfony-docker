@@ -1,4 +1,4 @@
-FROM debian:bullseye
+FROM debian:bullseye-slim
 
 LABEL maintainer="Kibatic system@kibatic.com"
 
