@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-chown www-data /var/www/ /var/www/var/log
+chown -R www-data:www-data /var/www/var
 
 SYMFONY_VERSION=${SYMFONY_VERSION:-5}
 NGINX_CONFIG=symfony$SYMFONY_VERSION
