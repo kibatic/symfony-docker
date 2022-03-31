@@ -40,24 +40,34 @@ Image tags follows PHP versions
     <thead>
         <tr>
             <th></th>
-            <th colspan="5">Symfony</th>
+            <th colspan="6">Symfony</th>
         </tr>
     </thead>
     <tbody>
         <tr>
-            <th rowspan="8">Image</th>
+            <th rowspan="9">Image</th>
             <td></td>
             <td>2.x</td>
             <td>3.x</td>
             <td>4.x</td>
             <td>5.x</td>
+            <td>6.x</td>
         </tr>
         <tr>
-            <td>7.4</td>
+            <td>8.1</td>
+            <td>:x:</td>
+            <td>:x:</td>
+            <td>:heavy_check_mark: (not tested)</td>
+            <td>:heavy_check_mark: (not tested)</td>
+            <td>:heavy_check_mark: (not tested)</td>
+        </tr>
+        <tr>
+            <td>8.0</td>
             <td>:x:</td>
             <td>:x:</td>
             <td>:heavy_check_mark: (not tested)</td>
             <td>:heavy_check_mark: (default)</td>
+            <td>:heavy_check_mark: (not tested)</td>
         </tr>
         <tr>
             <td>7.4</td>
@@ -65,6 +75,7 @@ Image tags follows PHP versions
             <td>:x:</td>
             <td>:heavy_check_mark:</td>
             <td>:heavy_check_mark: (default)</td>
+            <td>:x:</td>
         </tr>
         <tr>
             <td>7.3</td>
@@ -72,6 +83,7 @@ Image tags follows PHP versions
             <td>:heavy_check_mark: (not tested)</td>
             <td>:heavy_check_mark: (default)</td>
             <td>:heavy_check_mark: (not tested)</td>
+            <td>:x:</td>
         </tr>
         <tr>
             <td>7.2</td>
@@ -79,12 +91,14 @@ Image tags follows PHP versions
             <td>:heavy_check_mark:</td>
             <td>:heavy_check_mark:</td>
             <td>:heavy_check_mark: (not tested)</td>
+            <td>:x:</td>
         </tr>
         <tr>
             <td>7.1</td>
             <td>:heavy_check_mark: (not tested)</td>
             <td>:heavy_check_mark:</td>
             <td>:heavy_check_mark:</td>
+            <td>:x:</td>
             <td>:x:</td>
         </tr>
         <tr>
@@ -93,11 +107,13 @@ Image tags follows PHP versions
             <td>:heavy_check_mark: (not tested)</td>
             <td>:x:</td>
             <td>:x:</td>
+            <td>:x:</td>
         </tr>
         <tr>
             <td>5.6</td>
             <td>:heavy_check_mark: (not tested)</td>
             <td>:heavy_check_mark: (not tested)</td>
+            <td>:x:</td>
             <td>:x:</td>
             <td>:x:</td>
         </tr>
