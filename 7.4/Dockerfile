@@ -1,4 +1,4 @@
-FROM debian:stretch
+FROM debian:bullseye-slim
 
 LABEL maintainer="Kibatic system@kibatic.com"
 
@@ -23,7 +23,7 @@ RUN apt-get -qq update > /dev/null && DEBIAN_FRONTEND=noninteractive apt-get -qq
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 RUN wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg && \
-    echo "deb https://packages.sury.org/php/ stretch main" > /etc/apt/sources.list.d/php.list && \
+    echo "deb https://packages.sury.org/php/ bullseye main" > /etc/apt/sources.list.d/php.list && \
     apt-get update -qq > /dev/null && \
     DEBIAN_FRONTEND=noninteractive apt-get -qq -y --no-install-recommends install \
     php7.4 \
