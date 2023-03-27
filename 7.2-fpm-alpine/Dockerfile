@@ -1,0 +1,51 @@
+FROM php:7.2-fpm-alpine
+
+MAINTAINER Philippe Le Van (https://framapiaf.org/@plv)
+
+# https://getcomposer.org/doc/03-cli.md#composer-allow-superuser
+ENV COMPOSER_ALLOW_SUPERUSER 1
+ENV PERFORMANCE_OPTIM false
+
+# basic packages
+RUN apk add --virtual .build-deps $PHPIZE_DEPS --no-cache && \
+    apk add --no-cache \
+    	bash \
+		supervisor \
+    	ca-certificates \
+    	nginx \
+    	wget \
+    	unzip \
+    	php7-intl \
+    	php7-xml \
+    	php7-mbstring \
+    	php7-zip
+
+# install composer
+RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
+    php -r "if (hash_file('sha384', 'composer-setup.php') === '55ce33d7678c5a611085589f1f3ddf8b3c52d662cd01d4ba75c0ee0459970c2200a51f492d557530c71c15d8dba01eae') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;" &&\
+    php composer-setup.php &&\
+    php -r "unlink('composer-setup.php');" &&\
+    mv composer.phar /usr/local/bin/composer &&\
+    composer self-update 1.10.17
+
+# config php
+RUN sed -i -e "s/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g" /etc/php7/php.ini && \
+    mkdir -p /run/php
+
+# config nginx
+RUN sed -i -e "s#include /etc/nginx/conf.d/\*.conf;#include /etc/nginx/conf.d/*.conf;\ninclude /etc/nginx/sites-enabled/\*;#g" /etc/nginx/nginx.conf &&\
+	echo "daemon off;" >> /etc/nginx/nginx.conf &&\
+    mkdir -p /run/nginx &&\
+    mkdir -p /etc/nginx/sites-enabled &&\
+    rm /etc/nginx/conf.d/default.conf
+
+COPY rootfs /
+
+ENV LOG_STREAM="/var/stdout"
+RUN mkfifo $LOG_STREAM && chmod 777 $LOG_STREAM
+
+WORKDIR /var/www
+
+EXPOSE 80
+
+CMD ["/entrypoint.sh"]
