@@ -9,16 +9,21 @@ ENV PERFORMANCE_OPTIM false
 # basic packages
 RUN apk add --virtual .build-deps $PHPIZE_DEPS --no-cache && \
     apk add --no-cache \
-    	bash \
-		supervisor \
-    	ca-certificates \
-    	nginx \
-    	wget \
-    	unzip \
-    	php7-intl \
-    	php7-xml \
-    	php7-mbstring \
-    	php7-zip
+        bash \
+        supervisor \
+        ca-certificates \
+        nginx \
+        wget \
+        unzip \
+        icu-dev \
+        acl \
+        libxml2-dev \
+        libzip-dev
+RUN docker-php-ext-install \
+    intl \
+    bcmath \
+    zip \
+    opcache
 
 # install composer
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
@@ -28,8 +33,10 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" &&
     mv composer.phar /usr/local/bin/composer &&\
     composer self-update 1.10.17
 
+
 # config php
-RUN sed -i -e "s/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g" /etc/php7/php.ini && \
+RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
+RUN sed -i -e "s/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g" "$PHP_INI_DIR/php.ini" && \
     mkdir -p /run/php
 
 # config nginx
