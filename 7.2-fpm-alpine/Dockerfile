@@ -8,10 +8,7 @@ ENV PERFORMANCE_OPTIM false
 
 # mise à jour des packages
 RUN apk update --no-cache && \
-	apk upgrade --no-cache
-
-# basic packages
-RUN apk add --virtual .build-deps $PHPIZE_DEPS --no-cache && \
+	apk upgrade --no-cache && \
     apk add --no-cache \
         bash \
         supervisor \
@@ -19,11 +16,12 @@ RUN apk add --virtual .build-deps $PHPIZE_DEPS --no-cache && \
         nginx \
         wget \
         unzip \
-    	grep \
         icu-dev \
         acl \
         libxml2-dev \
-        libzip-dev
+        libzip-dev \
+    	grep
+
 RUN docker-php-ext-install \
     intl \
     bcmath \
