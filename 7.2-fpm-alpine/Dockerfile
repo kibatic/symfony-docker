@@ -19,6 +19,7 @@ RUN apk add --virtual .build-deps $PHPIZE_DEPS --no-cache && \
         nginx \
         wget \
         unzip \
+    	grep \
         icu-dev \
         acl \
         libxml2-dev \
