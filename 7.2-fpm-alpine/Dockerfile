@@ -6,6 +6,10 @@ MAINTAINER Philippe Le Van (https://framapiaf.org/@plv)
 ENV COMPOSER_ALLOW_SUPERUSER 1
 ENV PERFORMANCE_OPTIM false
 
+# mise à jour des packages
+RUN apk update --no-cache && \
+	apk upgrade --no-cache
+
 # basic packages
 RUN apk add --virtual .build-deps $PHPIZE_DEPS --no-cache && \
     apk add --no-cache \
