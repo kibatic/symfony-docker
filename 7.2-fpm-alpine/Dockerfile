@@ -20,7 +20,8 @@ RUN apk update --no-cache && \
         acl \
         libxml2-dev \
         libzip-dev \
-    	grep
+    	grep \
+	tzdata
 
 RUN docker-php-ext-install \
     intl \
