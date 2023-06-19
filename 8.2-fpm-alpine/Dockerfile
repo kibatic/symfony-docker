@@ -45,6 +45,7 @@ RUN sed -i -e "s/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g" "$PHP_INI_DIR/php.ini
 # config nginx
 RUN sed -i -e "s#include /etc/nginx/conf.d/\*.conf;#include /etc/nginx/conf.d/*.conf;\ninclude /etc/nginx/sites-enabled/\*;#g" /etc/nginx/nginx.conf &&\
 	echo "daemon off;" >> /etc/nginx/nginx.conf &&\
+    rm /etc/nginx/http.d/default.conf &&\
     mkdir -p /run/nginx &&\
     mkdir -p /etc/nginx/sites-enabled
 COPY rootfs /

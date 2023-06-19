@@ -11,15 +11,6 @@ for dir in "${RW_FOLDERS[@]}"; do
   fi
 done
 
-NGINX_CONFIG=symfony
-
-# Avoid to remove a bind mounted nginx config
-NGINX_DEFAULT=/etc/nginx/sites-enabled/default
-if ! mountpoint -q $NGINX_DEFAULT; then
-  echo "Using default nginx config : $NGINX_CONFIG"
-  ln -s /etc/nginx/sites-available/$NGINX_CONFIG.conf $NGINX_DEFAULT
-fi
-
 # Disable opcache optimisation for developpement
 # Allow files to be reloaded when update without restarting fpm process
 if [[ "$PERFORMANCE_OPTIM" = "false" ]]
