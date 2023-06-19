@@ -14,6 +14,7 @@ RUN apk update --no-cache && \
         supervisor \
         ca-certificates \
         nginx \
+    	git \
         wget \
         unzip \
         icu-dev \
