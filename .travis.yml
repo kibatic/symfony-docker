@@ -12,6 +12,7 @@ env:
   - PHP_VERSION=7.4 SYMFONY_VERSION=5
   - PHP_VERSION=8.0 SYMFONY_VERSION=5
   - PHP_VERSION=8.1 SYMFONY_VERSION=5
+  - PHP_VERSION=8.5 SYMFONY_VERSION=5
 
 services:
   - docker
@@ -33,6 +34,7 @@ install:
   - if [ "$SYMFONY_VERSION" = "5" ]; then export SYMFONY_DEMO_VERSION="v1.6.4"; fi
   - if [ "$SYMFONY_VERSION" = "5" -a "$PHP_VERSION" = "8.0" ]; then export SYMFONY_DEMO_VERSION="main"; fi
   - if [ "$SYMFONY_VERSION" = "5" -a "$PHP_VERSION" = "8.1" ]; then export SYMFONY_DEMO_VERSION="main"; fi
+  - if [ "$SYMFONY_VERSION" = "5" -a "$PHP_VERSION" = "8.2" ]; then export SYMFONY_DEMO_VERSION="main"; fi
 
 script:
   - git clone https://github.com/symfony/symfony-demo symfony; cd symfony; git checkout $SYMFONY_DEMO_VERSION
