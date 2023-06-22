@@ -16,7 +16,7 @@ done
 if [[ "$PERFORMANCE_OPTIM" = "false" ]]
 then
   echo "Disable performance optimisation"
-  echo > /etc/php8/conf.d/99-symfony.ini
+  echo > /usr/local/etc/php/conf.d/99-symfony.ini
 fi
 
 exec /usr/bin/supervisord -n
