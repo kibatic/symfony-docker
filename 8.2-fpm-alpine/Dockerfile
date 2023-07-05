@@ -9,7 +9,6 @@ ENV PERFORMANCE_OPTIM false
 # mise à jour des packages
 RUN apk update --no-cache && \
 	apk upgrade --no-cache && \
-    apk del --no-cache icu-data-en && \
     apk add --no-cache \
         bash \
         supervisor \
