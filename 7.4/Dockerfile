@@ -19,6 +19,7 @@ RUN apt-get -qq update > /dev/null && DEBIAN_FRONTEND=noninteractive apt-get -qq
     make \
     unzip \
     libicu-dev \
+    libzip-dev \
     apt-transport-https > /dev/null && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
