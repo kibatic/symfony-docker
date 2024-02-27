@@ -18,6 +18,7 @@ RUN apt-get -qq update > /dev/null && DEBIAN_FRONTEND=noninteractive apt-get -qq
     openssl \
     make \
     unzip \
+    libicu-dev \
     apt-transport-https > /dev/null && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
