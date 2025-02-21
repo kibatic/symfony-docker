@@ -1,6 +1,8 @@
 ![symfony-docker](http://i.imgur.com/vc5ZVqL.png?2)
 
-# Symfony + Nginx + php-fpm
+Symfony + Nginx + php-fpm
+=========================
+
 [![Build Status](https://travis-ci.org/kibatic/symfony-docker.svg?branch=master)](https://travis-ci.org/kibatic/symfony-docker)
 [![](https://images.microbadger.com/badges/image/kibatic/symfony:latest.svg)](https://microbadger.com/images/kibatic/symfony:latest "Get your own image badge on microbadger.com")
 [![](https://images.microbadger.com/badges/version/kibatic/symfony:latest.svg)](https://microbadger.com/images/kibatic/symfony:latest "Get your own version badge on microbadger.com")
@@ -12,7 +14,9 @@ Based on Debian Jessie.
 
 If you are experiencing some issues, take a look at [TROUBLESHOOTING](TROUBLESHOOTING.md)
 
-### Supported tags and respective `Dockerfile` links
+
+Supported tags and respective `Dockerfile` links
+------------------------------------------------
 
 Image tags follows PHP versions
 
@@ -34,7 +38,8 @@ Image tags follows PHP versions
 
 `5.4` **Not maintained, END OF LIFE**
 
-### Compatibility matrix
+Compatibility matrix
+--------------------
 
 <table>
     <thead>
@@ -127,7 +132,10 @@ Composer versions :
 - 7.3 : 1.10.17
 - 7.2 : 1.10.17
 
-### Usage
+Usage
+-----
+
+### Basic Usage
 
 ```bash
 docker pull kibatic/symfony
@@ -151,7 +159,53 @@ docker run -e SYMFONY_VERSION=4 -v $(pwd):/var/www -p 8080:80 kibatic/symfony:7.
 
 Symfony app will be accessible on http://localhost:8080/
 
-### Custom nginx configuration
+
+### use of blackfire (PHP >= 8.4)
+
+Add the following vars in the docker-compose file :
+
+
+```yaml
+  web:
+    build: .
+    volumes:
+      - .:/var/www
+    environment:
+      PERFORMANCE_OPTIM: "false"
+      BLACKFIRE_SERVER_ID: 3xxxx-xxxxx-xxxxxx-xxxxxxx-xxc
+      BLACKFIRE_SERVER_TOKEN: 5d6cxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxc47fb
+      BLACKFIRE_CLIENT_ID: 8exxxxx-xxx-xxxxx-xxxxxx-xx5
+      BLACKFIRE_CLIENT_TOKEN: 6caaxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx012
+```
+
+Then to enable or disalble blackfire :
+
+```bash
+# enable blackfire
+docker compose exec -T web /enable-blackfire.sh --on
+
+# disable blackfire
+docker compose exec -T web /enable-blackfire.sh --off
+```
+
+In our project, we use a Makefile to simplify the commands (from the container or from the host) :
+
+```makefile
+_enable-blackfire: ## enable blackfire
+	/enable-blackfire.sh --on
+
+enable-blackfire: ## enable blackfire
+	docker compose exec -T web make _enable-blackfire
+
+_disable-blackfire: ## disable blackfire
+	/enable-blackfire.sh --off
+
+disable-blackfire: ## disable blackfire
+	docker compose exec -T web make _disable-blackfire
+```
+
+Custom nginx configuration
+--------------------------
 
 If you want to replace the default nginx settings, overwrite configuration file at `/etc/nginx/sites-enabled/default`.
 
@@ -164,6 +218,9 @@ You may also want to add only some directives in [existing site config](7.4/root
 ```dockerfile
 COPY custom-config.conf /etc/nginx/conf.d/docker/custom-config.conf
 ```
+
+Logging
+------
 
 ### Logging (PHP >= 7.3)
 
@@ -217,7 +274,8 @@ We also provide a default dirty solution for standard monolog configuration, **t
 tail -q -n 0 -F app/logs/dev.log app/logs/prod.log var/logs/dev.log var/logs/prod.log
 ```
 
-### Minimal package included
+Minimal package included
+------------------------
 
 * nginx
 * php\*-fpm
@@ -225,5 +283,9 @@ tail -q -n 0 -F app/logs/dev.log app/logs/prod.log var/logs/dev.log var/logs/pro
 * php\*-intl
 * php\*-mbstring
 
-### Exposed port
+Exposed port
+------------
+
 * 80 : nginx
+
+
