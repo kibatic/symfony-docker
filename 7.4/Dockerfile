@@ -1,4 +1,4 @@
-FROM php:7.4.33-zts-bullseye
+FROM debian:bullseye-slim
 
 LABEL maintainer="Kibatic system@kibatic.com"
 
@@ -18,30 +18,27 @@ RUN apt-get -qq update > /dev/null && DEBIAN_FRONTEND=noninteractive apt-get -qq
     openssl \
     make \
     unzip \
-    libicu-dev \
-    libzip-dev \
     apt-transport-https > /dev/null && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# install php extensions
-RUN docker-php-ext-install \
-    intl \
-    bcmath \
-    zip \
-    opcache
-
-# TODO: php7.4-cli  php7.4-xml php7.4-mbstring php7.4-curl ?
-
-# install composer
-RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
-    php -r "if (hash_file('sha384', 'composer-setup.php') === 'e21205b207c3ff031906575712edab6f13eb0b361f2085f1f1237b7126d785e826a450292b6cfd1d64d92e6563bbde02') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"	&&\
-    php composer-setup.php &&\
-    php -r "unlink('composer-setup.php');" &&\
-    mv composer.phar /usr/local/bin/composer
-
-# configure nginx
-RUN echo "daemon off;" >> /etc/nginx/nginx.conf && \
+RUN wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg && \
+    echo "deb https://packages.sury.org/php/ bullseye main" > /etc/apt/sources.list.d/php.list && \
+    apt-get update -qq > /dev/null && \
+    DEBIAN_FRONTEND=noninteractive apt-get -qq -y --no-install-recommends install \
+    php7.4 \
+    php7.4-cli \
+    php7.4-intl \
+    php7.4-fpm \
+    php7.4-xml \
+    php7.4-mbstring \
+    php7.4-curl > /dev/null && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
+    php -r "readfile('https://getcomposer.org/installer');" | php -- \
+        --install-dir=/usr/local/bin \
+        --filename=composer && \
+    echo "daemon off;" >> /etc/nginx/nginx.conf && \
     mkdir -p /run/php
 
 COPY rootfs /
