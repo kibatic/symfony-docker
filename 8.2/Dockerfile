@@ -1,6 +1,6 @@
 FROM debian:bullseye-slim
 
-LABEL maintainer="Kibatic system@kibatic.com"
+LABEL org.opencontainers.image.authors="Philippe Le Van (https://framapiaf.org/@plv)"
 
 # https://getcomposer.org/doc/03-cli.md#composer-allow-superuser
 ENV COMPOSER_ALLOW_SUPERUSER 1

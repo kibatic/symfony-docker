@@ -1,6 +1,6 @@
 FROM php:8.2-fpm-alpine
 
-MAINTAINER Philippe Le Van (https://framapiaf.org/@plv)
+LABEL org.opencontainers.image.authors="Philippe Le Van (https://framapiaf.org/@plv)"
 
 # https://getcomposer.org/doc/03-cli.md#composer-allow-superuser
 ENV COMPOSER_ALLOW_SUPERUSER 1
