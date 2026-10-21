@@ -1,10 +1,13 @@
 FROM php:7.4-fpm-bullseye
 
-MAINTAINER Philippe Le Van (https://framapiaf.org/@plv)
+LABEL org.opencontainers.image.authors="Philippe Le Van (https://framapiaf.org/@plv)"
 
 # https://getcomposer.org/doc/03-cli.md#composer-allow-superuser
 ENV COMPOSER_ALLOW_SUPERUSER 1
 ENV PERFORMANCE_OPTIM false
+
+# bullseye is EOL: packages are now only available on archive.debian.org
+RUN sed -i 's#http://deb.debian.org#http://archive.debian.org#' /etc/apt/sources.list
 
 RUN apt-get -qq update > /dev/null && DEBIAN_FRONTEND=noninteractive apt-get -qq -y --no-install-recommends install \
     apt-utils \
@@ -32,7 +35,7 @@ RUN docker-php-ext-install \
 
 # install composer
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
-    php -r "if (hash_file('sha384', 'composer-setup.php') === 'dac665fdc30fdd8ec78b38b9800061b4150413ff2e3b6f88543c636f7cd84f6db9189d43a81e5503cda447da73c7e5b6') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;" &&\
+    php -r "if (hash_file('sha384', 'composer-setup.php') === 'c8b085408188070d5f52bcfe4ecfbee5f727afa458b2573b8eaaf77b3419b0bf2768dc67c86944da1544f06fa544fd47') { echo 'Installer verified'.PHP_EOL; } else { echo 'Installer corrupt'.PHP_EOL; unlink('composer-setup.php'); exit(1); }" &&\
     php composer-setup.php &&\
     php -r "unlink('composer-setup.php');" &&\
     mv composer.phar /usr/local/bin/composer
