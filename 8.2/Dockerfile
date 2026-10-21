@@ -6,6 +6,9 @@ LABEL org.opencontainers.image.authors="Philippe Le Van (https://framapiaf.org/@
 ENV COMPOSER_ALLOW_SUPERUSER 1
 ENV PERFORMANCE_OPTIM false
 
+# bullseye is EOL: packages are now only available on archive.debian.org
+RUN sed -i 's#http://deb.debian.org#http://archive.debian.org#' /etc/apt/sources.list
+
 RUN apt-get -qq update > /dev/null && DEBIAN_FRONTEND=noninteractive apt-get -qq -y --no-install-recommends install \
     apt-utils \
     supervisor \
