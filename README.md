@@ -26,6 +26,8 @@ Image tags follows PHP versions
 
 `7` `7.4` [(7.4/Dockerfile)](https://github.com/kibatic/symfony-docker/blob/master/7.4/Dockerfile)
 
+`7.4-trixie` [(7.4-trixie/Dockerfile)](https://github.com/kibatic/symfony-docker/blob/master/7.4-trixie/Dockerfile) : PHP 7.4 (sury) on Debian 13 trixie
+
 `7.3` [(7.3/Dockerfile)](https://github.com/kibatic/symfony-docker/blob/master/7.3/Dockerfile)
 
 `7.2` [(7.2/Dockerfile)](https://github.com/kibatic/symfony-docker/blob/master/7.2/Dockerfile)
