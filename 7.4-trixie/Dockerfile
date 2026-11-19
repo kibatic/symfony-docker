@@ -10,7 +10,6 @@ RUN apt-get -qq update > /dev/null && DEBIAN_FRONTEND=noninteractive apt-get -qq
     apt-utils \
     supervisor \
     ca-certificates \
-    nginx \
     wget \
     vim \
     git \
@@ -19,6 +18,21 @@ RUN apt-get -qq update > /dev/null && DEBIAN_FRONTEND=noninteractive apt-get -qq
     make \
     unzip \
     apt-transport-https > /dev/null && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+# nginx stable depuis le dépôt officiel nginx.org (plus récent que le paquet Debian)
+# Le paquet nginx.org n'a ni sites-enabled ni user www-data : on reprend la disposition Debian.
+RUN . /etc/os-release && \
+    curl -fsSL https://nginx.org/keys/nginx_signing.key -o /usr/share/keyrings/nginx-archive-keyring.asc && \
+    echo "deb [signed-by=/usr/share/keyrings/nginx-archive-keyring.asc] https://nginx.org/packages/debian ${VERSION_CODENAME} nginx" > /etc/apt/sources.list.d/nginx.list && \
+    printf "Package: *\nPin: origin nginx.org\nPin-Priority: 900\n" > /etc/apt/preferences.d/99nginx && \
+    apt-get -qq update > /dev/null && \
+    DEBIAN_FRONTEND=noninteractive apt-get -qq -y --no-install-recommends install nginx > /dev/null && \
+    rm -f /etc/nginx/conf.d/default.conf && \
+    mkdir -p /etc/nginx/sites-enabled /etc/nginx/sites-available && \
+    sed -i -e 's/^user .*/user www-data;/' \
+        -e 's#^\(\s*\)include /etc/nginx/conf.d/\*.conf;#&\n\1include /etc/nginx/sites-enabled/*;#' /etc/nginx/nginx.conf && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
